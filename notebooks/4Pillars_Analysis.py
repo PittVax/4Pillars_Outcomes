@@ -3,7 +3,7 @@
 
 # ## Setup
 
-# In[84]:
+# In[101]:
 
 
 # References
@@ -143,7 +143,7 @@ columnLabels = {
 #     * `_VAX_RATE` is ratio of vaccinated patients to total location population
 #     * `_MISSED_OPS_RATE` is the ratio of visits by unvaccinated patients to total visits  
 
-# In[85]:
+# In[102]:
 
 
 # Redacted for privacy
@@ -157,7 +157,7 @@ columnLabels = {
 # * Each row is a location.
 # * N = the count of patients with at least one visit to any department in the location.
 
-# In[86]:
+# In[103]:
 
 
 # Redacted for privancy
@@ -166,7 +166,7 @@ columnLabels = {
 
 # ### Site information
 
-# In[87]:
+# In[104]:
 
 
 # Redacted for privacy
@@ -193,7 +193,7 @@ columnLabels = {
 # 
 # Conclusion: Use Strategy 2 (`dfNoWic`) which represents the desired context
 
-# In[88]:
+# In[105]:
 
 
 dfDropWic_Outcomes_Locs = diDfs['dfDropWic_Outcomes_Locs']
@@ -237,7 +237,7 @@ for vax, df in df.groupby(['Vaccine']):
 #     plot.savefig(os.path.join(projectRoot, 'reports', 'figures', 'plt_violin_' + vax + "_" + timestr + '.png'))
 
 
-# In[89]:
+# In[106]:
 
 
 groupedWic = get_patient_counts(diDfs['dfWithWic'])
@@ -273,7 +273,7 @@ locFilter
 
 # #### Intervention dates
 
-# In[90]:
+# In[107]:
 
 
 dfFirstDates = diDfs['dfCombined'].groupby(['BASELINE']).agg({
@@ -302,7 +302,7 @@ dfFirstDates[dfFirstDates['BASELINE'] == 'Follow-up']
 
 # #### Descriptors
 
-# In[91]:
+# In[108]:
 
 
 # Prepare a dataframe
@@ -320,7 +320,7 @@ dfData = pd.merge(left=dfData, right=dfSites, on='LOC_ID')
 
 # ##### By Timepoint
 
-# In[92]:
+# In[109]:
 
 
 ageXtime = pd.crosstab(dfData['BASELINE'],
@@ -337,7 +337,7 @@ ageXtime.to_excel(
 
 # ##### By Phase
 
-# In[93]:
+# In[110]:
 
 
 df = dfData[dfData['BASELINE'] == 'Baseline']
@@ -361,7 +361,7 @@ phaseXage.to_excel(
 
 # #### All Location-level outcomes
 
-# In[94]:
+# In[111]:
 
 
 dfData = diDfs['dfNoWic_Outcomes_Locs']
@@ -453,7 +453,7 @@ for c in list(dfComb.columns.levels[0]):
 writer.save()
 
 
-# In[95]:
+# In[112]:
 
 
 idx = pd.IndexSlice
@@ -467,7 +467,7 @@ for ls in cols:
     #     df.to_excel(os.path.join(projectRoot, 'reports', 'tables', 'outcomes'+ str(len(ls)) +'.xlsx'))
 
 
-# In[96]:
+# In[113]:
 
 
 # Patients by location
@@ -487,7 +487,7 @@ df.to_excel(
 # Both return similar results.  
 # Use Strategy 2 dfNoWic  
 
-# In[97]:
+# In[114]:
 
 
 def find_sigs(df, groupers, outcomes, vaxVars, residual=False, show=False):
@@ -511,7 +511,7 @@ def find_sigs(df, groupers, outcomes, vaxVars, residual=False, show=False):
     return dfResults
 
 
-# In[98]:
+# In[115]:
 
 
 # Drop location over 5% difference
@@ -529,7 +529,7 @@ df = df[df['PR(>F)'] <= .05]
 df.set_index(idx)
 
 
-# In[99]:
+# In[116]:
 
 
 # ANOVA of strategy 2 (Exclude)
@@ -548,7 +548,7 @@ dfResult.set_index(idx)
 
 # ### All results
 
-# In[100]:
+# In[117]:
 
 
 # Define data
