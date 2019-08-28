@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
   - conda
+  - jupyter
   - ipykernel 
   - pandas
   - numpy

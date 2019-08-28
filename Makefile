@@ -14,6 +14,9 @@ else
 HAS_CONDA=True
 endif
 
+SHELL := /bin/bash
+CONDAROOT := $(shell dirname $(dir $(shell which conda)))
+
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -29,9 +32,24 @@ else
 	conda create --name $(PROJECT_NAME) python=2.7
 	conda env update --name $(PROJECT_NAME) -f environment.yml
 endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
+		@echo ">>> New conda env created. Activate with: conda activate $(PROJECT_NAME)"
 else
-	@echo ">>> Didn't detect conda. Conda is required for automatic configuration of $(PROJECT_NAME)"
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+	$(PYTHON_INTERPRETER) -m pip install -q virtualenv virtualenvwrapper
+	@echo ">>> Installing virtualenvwrapper if not already intalled."
+	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
+	@echo ">>> New virtualenv created. Activate with: workon $(PROJECT_NAME)"
+endif
+
+## Start Jupyter notebook
+jupyter: test_environment
+ifeq (False,$(HAS_CONDA))
+	@echo ">>> Detected conda, starting jupyter in conda environment."
+	source $(CONDAROOT)/bin/activate && conda activate $(PROJECT_NAME) && jupyter notebook
+else
+	@echo ">>> Starting Jupyter in virtualenv."
+	@bash -c "source `which virtualenvwrapper.sh`;workon $(PROJECT_NAME); jupyter notebook"
 endif
 
 ## Delete all compiled Python files
