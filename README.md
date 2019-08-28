@@ -1,7 +1,5 @@
 # 4Pillars_CMI_Outcomes
 
-==============================
-
 Analysis of an implemenation of the 4 Pillars Practice Transformation Program for Immunization in a primary care organization.
 
 ## Project Organization
@@ -26,6 +24,10 @@ Analysis of an implemenation of the 4 Pillars Practice Transformation Program fo
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
 ## Installation instructions
+
+Local installation is not necessary. Github renders the notebooks online. View by navigating to `notebooks` and clicking the [notebook title](https://github.com/PittVax/4Pillars_Outcomes/blob/master/notebooks/4Pillars_Analysis.ipynb).
+
+A `Makefile` provides convenient installation if desired.  
 
 * Clone this repo to your local machine and navigate into the project.
 
