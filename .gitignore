@@ -74,6 +74,8 @@ target/
 
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
+# Converted notebooks
+notebooks/*.py
 
 # exclude data from source control by default
 /data/
@@ -92,4 +94,6 @@ data*
 *.DS_Store
 *.html
 out/*
+
+# Exceptions
 !**/.gitkeep
